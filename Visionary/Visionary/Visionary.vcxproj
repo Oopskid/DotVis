@@ -170,6 +170,9 @@
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DotVis\DotVis.vcxproj">
+      <Project>{33278530-8e75-41cc-84f1-b8ad2bb8c382}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\externals\WinSTR\WSTRCore\WSTRCore.vcxproj">
       <Project>{1ef6b8d9-ee35-4781-8a25-91908f0c712d}</Project>
     </ProjectReference>
