@@ -169,6 +169,9 @@
   <ItemGroup>
     <ClInclude Include="include\Canvas.h" />
     <ClInclude Include="include\DVF.h" />
+    <ClInclude Include="include\RDevice.h" />
+    <ClInclude Include="include\Texture2DResource.h" />
+    <ClInclude Include="include\TextureCommon.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +182,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="source\Canvas.cpp" />
+    <ClCompile Include="source\RDevice.cpp" />
+    <ClCompile Include="source\Texture2DResource.cpp" />
+    <ClCompile Include="source\TextureCommon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

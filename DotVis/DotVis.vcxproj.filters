@@ -22,6 +22,18 @@
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{4203bfc3-0ca3-492e-87a5-e52433a5a48b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Builders">
+      <UniqueIdentifier>{e7475b5d-86ab-4eda-8def-f8f1c17e03cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resources">
+      <UniqueIdentifier>{4c46e2e5-913b-4219-a738-16ae2478aee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resources">
+      <UniqueIdentifier>{8fb4cd0f-485d-4aa2-8909-b6ce74ab546d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Builders">
+      <UniqueIdentifier>{d0bbd9e3-4655-4d48-9633-de79710323e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -33,6 +45,15 @@
     <ClInclude Include="include\DVF.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="include\Texture2DResource.h">
+      <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RDevice.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureCommon.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -40,6 +61,15 @@
     </ClCompile>
     <ClCompile Include="source\Canvas.cpp">
       <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Texture2DResource.cpp">
+      <Filter>Source Files\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="source\RDevice.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TextureCommon.cpp">
+      <Filter>Source Files\Builders</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
