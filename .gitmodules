@@ -4,3 +4,6 @@
 [submodule "externals/WinSTR"]
 	path = externals/WinSTR
 	url = https://github.com/Oopskid/WinSTR.git
+[submodule "externals/Deed"]
+	path = externals/Deed
+	url = https://github.com/Oopskid/Deed.git
