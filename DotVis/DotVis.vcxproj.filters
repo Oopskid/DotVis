@@ -34,14 +34,17 @@
     <Filter Include="Source Files\Builders">
       <UniqueIdentifier>{d0bbd9e3-4655-4d48-9633-de79710323e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Maths">
-      <UniqueIdentifier>{353b9b8e-7b1e-4a39-a1b2-e445901b43b4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Shaders">
       <UniqueIdentifier>{58a76615-7c10-47c7-8440-e40c96a2891c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Shaders">
       <UniqueIdentifier>{20527826-536f-4232-ba59-095e7b16066a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Data">
+      <UniqueIdentifier>{9c3800a8-8d86-4009-8504-fa10a5402195}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data">
+      <UniqueIdentifier>{fad037fd-a7a6-4d0f-ab8d-2fc06b7e1947}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +78,9 @@
     <ClInclude Include="include\ShaderBuilder.h">
       <Filter>Header Files\Builders</Filter>
     </ClInclude>
+    <ClInclude Include="include\Files.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -103,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="source\ShaderBuilder.cpp">
       <Filter>Source Files\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Files.cpp">
+      <Filter>Source Files\Data</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
