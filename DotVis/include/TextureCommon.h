@@ -1,3 +1,5 @@
+#pragma once
+
 //Framework
 #include "DVF.h"
 

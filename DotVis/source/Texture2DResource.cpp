@@ -63,6 +63,22 @@ void DVF::Texture2DResource::borrowTarget(ID3D11RenderTargetView* loanedTarget)
 	flags &= ~OWNERSHIP_TARGET;
 }
 
+void DVF::Texture2DResource::holdTexture(ID3D11Texture2D* providedTexture)
+{
+	terminateTexture();
+
+	texture = providedTexture;
+	flags |= OWNERSHIP_BASE;
+}
+
+void DVF::Texture2DResource::holdTarget(ID3D11RenderTargetView* providedTarget)
+{
+	terminateTextureTarget();
+
+	textureTarget = providedTarget;
+	flags |= OWNERSHIP_TARGET;
+}
+
 void Texture2DResource::terminateTexture()
 {
 	if (OWNERSHIP_BASE & flags)

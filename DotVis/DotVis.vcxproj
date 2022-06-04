@@ -91,6 +91,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>include\;$(DXSDK_DIR)Include;..\externals\Deed\Deed\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -113,6 +114,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>include\;$(DXSDK_DIR)Include;..\externals\Deed\Deed\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -135,6 +137,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>include\;$(DXSDK_DIR)Include;..\externals\Deed\Deed\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -157,6 +160,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>include\;$(DXSDK_DIR)Include;..\externals\Deed\Deed\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -175,6 +179,8 @@
     <ClInclude Include="include\ComputeSh.h" />
     <ClInclude Include="include\DVF.h" />
     <ClInclude Include="include\RDevice.h" />
+    <ClInclude Include="include\ShaderBuilder.h" />
+    <ClInclude Include="include\ShaderComponents.h" />
     <ClInclude Include="include\ShaderPart.h" />
     <ClInclude Include="include\Texture2DResource.h" />
     <ClInclude Include="include\TextureCommon.h" />
@@ -190,6 +196,8 @@
     <ClCompile Include="source\Canvas.cpp" />
     <ClCompile Include="source\ComputeSh.cpp" />
     <ClCompile Include="source\RDevice.cpp" />
+    <ClCompile Include="source\ShaderBuilder.cpp" />
+    <ClCompile Include="source\ShaderComponents.cpp" />
     <ClCompile Include="source\ShaderPart.cpp" />
     <ClCompile Include="source\Texture2DResource.cpp" />
     <ClCompile Include="source\TextureCommon.cpp" />

@@ -18,7 +18,7 @@ HRESULT DVF::RDevice::create(UINT flags)
 	if (dev || devCon) { return NTE_EXISTS; }
 
 	HRESULT result = S_OK;
-	#ifdef _DEBUG
+	#if isDebug
 		flags |= D3D11_CREATE_DEVICE_DEBUG;
 	#endif
 
@@ -63,7 +63,7 @@ HRESULT DVF::RDevice::makeSwapChain(HWND context, DXGI_FORMAT bufferFormat)
 
 HRESULT DVF::RDevice::makeSwapChain(HWND context, DXGI_SWAP_CHAIN_DESC options)
 {
-    if (!dev || !devCon) { return NTE_NOT_FOUND; }
+    if (DVAssert(dev && devCon, "Context not built before swapchain")) { return NTE_NOT_FOUND; }
 
     HRESULT result = S_OK;
 
@@ -86,6 +86,42 @@ HRESULT DVF::RDevice::makeSwapChain(HWND context, DXGI_SWAP_CHAIN_DESC options)
     result = factory->CreateSwapChain(dev, &options, &swapChain);
 
     return result;
+}
+
+HRESULT DVF::RDevice::makeBackBuffer()
+{
+    if (DVAssert(dev && devCon && swapChain, "Full context is required for creation of the back buffer")) { return NTE_NOT_FOUND; }
+    HRESULT result = S_OK;
+
+    //Fetch back buffer from the swap chain
+    ID3D11Texture2D* backBufferTexture = nullptr;
+    result = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBufferTexture);
+    backBuffer.borrowTexture(backBufferTexture);
+
+    //Create render view
+    ID3D11RenderTargetView* backBufferTarget = nullptr;
+    result = dev->CreateRenderTargetView(backBufferTexture, nullptr, &backBufferTarget);
+    backBuffer.holdTarget(backBufferTarget);
+
+    //Cache metadata and set viewport
+    backBuffer.updateMeta();
+
+    return result;
+}
+
+void DVF::RDevice::clearBackBuffer()
+{
+    backBuffer.clearColour(devCon);
+}
+
+void DVF::RDevice::resize(size_t width, size_t height)
+{
+    backBuffer.setPort(width, height);
+}
+
+void DVF::RDevice::setBackBufferTarget()
+{
+    backBuffer.setAsRenderTarget(devCon);
 }
 
 HRESULT DVF::RDevice::swapBuffer(UINT flags)

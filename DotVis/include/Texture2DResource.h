@@ -22,8 +22,13 @@ namespace DVF
 
 		std::wstring getName();
 
+		//Reference copy, NOT managed
 		void borrowTexture(ID3D11Texture2D* loanedTexture);
 		void borrowTarget(ID3D11RenderTargetView* loanedTarget);
+
+		//Ownership, managed
+		void holdTexture(ID3D11Texture2D* providedTexture);
+		void holdTarget(ID3D11RenderTargetView* providedTarget);
 
 		protected:
 		void terminateTexture();

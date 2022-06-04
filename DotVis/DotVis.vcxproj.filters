@@ -69,6 +69,12 @@
     <ClInclude Include="include\ComputeSh.h">
       <Filter>Header Files\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="include\ShaderComponents.h">
+      <Filter>Header Files\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShaderBuilder.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -91,6 +97,12 @@
     </ClCompile>
     <ClCompile Include="source\ComputeSh.cpp">
       <Filter>Source Files\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ShaderComponents.cpp">
+      <Filter>Source Files\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ShaderBuilder.cpp">
+      <Filter>Source Files\Builders</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
