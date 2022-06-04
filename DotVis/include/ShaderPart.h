@@ -6,6 +6,7 @@
 //Dependencies
 #include <fstream>
 #include <filesystem>
+#include "Files.h"
 #include "ShaderComponents.h"
 #include "ShaderBuilder.h"
 #include "RDevice.h"
