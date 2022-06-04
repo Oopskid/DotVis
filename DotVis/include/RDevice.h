@@ -1,3 +1,4 @@
+#pragma once
 
 //Structures
 #include "Canvas.h"
@@ -20,6 +21,12 @@ namespace DVF
 		//Make a swap chain for this device
 		HRESULT makeSwapChain(HWND context, DXGI_FORMAT bufferFormat = DXGI_FORMAT_B8G8R8A8_UNORM);
 		HRESULT makeSwapChain(HWND context, DXGI_SWAP_CHAIN_DESC options);
+
+		HRESULT makeBackBuffer();
+
+		void clearBackBuffer();
+		void resize(size_t width, size_t height);
+		void setBackBufferTarget();
 
 		//Swap the back buffer to present the render
 		HRESULT swapBuffer(UINT flags = NULL);

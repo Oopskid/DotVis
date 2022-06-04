@@ -6,16 +6,22 @@
 
 	//D3D Library linkage
 	#pragma comment(lib,"d3d11")
+	#pragma comment(lib,"d3dcompiler")
 	
 	//D3D includes
 	#include "d3d11.h"
+	#include "d3dcompiler.h"
 #endif
 
 #ifndef DVF_H
 	#define DVF_H
 
+	//Includes
+	#include <cassert>
+
 	//Macro helpers
 	#define DVXFirebreak(result) if(FAILED(result)) { return result; }
+	#define isDebug (defined(DEBUG) || defined(_DEBUG))
 
 	//Function helpers
 	namespace DVF
@@ -34,6 +40,17 @@
 		{
 			DVXClear(first);
 			DVXClear(rest...);
+		}
+
+		//Complex assert (can be redirected)
+		inline bool DVAssert(bool expression, const char* txt)
+		{
+			#ifdef _DEBUG
+				assert(expression && txt);
+				return false;
+			#else
+				return !expression;
+			#endif
 		}
 	}
 

@@ -23,6 +23,10 @@ class VisionApp : public Window
 	virtual void onStart() override;
 	virtual void main() override;
 	virtual void onEnd() override;
+	virtual void onResize() override;
+	virtual void onKeyDown(char vkey) override;
+	virtual void onKeyUp(char vkey) override;
+	virtual void onMouseMove(short x, short y) override;
 
 	void render(float dt);
 
