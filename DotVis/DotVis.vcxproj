@@ -209,6 +209,10 @@
       <Project>{eb1cdbed-62bd-4d16-b18e-df8589270e93}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\Common.hlsli" />
+    <None Include="shaders\RayCommon.hlsli" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

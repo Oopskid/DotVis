@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Data">
       <UniqueIdentifier>{fad037fd-a7a6-4d0f-ab8d-2fc06b7e1947}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{07187d44-bd2c-496e-93d3-56b3b2ed1de8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Raytracing">
+      <UniqueIdentifier>{3e0a40aa-cdc3-48a7-90f9-49952e679559}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -113,5 +119,13 @@
     <ClCompile Include="source\Files.cpp">
       <Filter>Source Files\Data</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\RayCommon.hlsli">
+      <Filter>Resource Files\Shaders\Raytracing</Filter>
+    </None>
+    <None Include="shaders\Common.hlsli">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
