@@ -8,7 +8,7 @@ ComputeSh::ComputeSh()
 
 }
 
-HRESULT ComputeSh::fromFile(const std::string& path, RDevice* rdevice, ShaderBuild::ShaderComponents* buildRules)
+HRESULT ComputeSh::fromFile(const std::string& path, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules)
 {
 	HRESULT result = S_OK;
 
@@ -20,7 +20,7 @@ HRESULT ComputeSh::fromFile(const std::string& path, RDevice* rdevice, ShaderBui
 	if (buildRules)
 	{
 		result = fetchRawCompile(path, &byteCode, codeLength,
-			buildRules->getModel(rdevice->getLevel()), 
+			buildRules->getModel(rdev->getLevel()), 
 			_strdup(impliedName.c_str()), 
 			buildRules);
 	}
@@ -34,7 +34,7 @@ HRESULT ComputeSh::fromFile(const std::string& path, RDevice* rdevice, ShaderBui
 	if (codeLength && byteCode && SUCCEEDED(result))
 	{
 		ID3D11ComputeShader* computeShader = nullptr;
-		result = rdevice->getDevice()->CreateComputeShader(byteCode, codeLength, buildRules ? buildRules->getLinkage() : nullptr, &computeShader);
+		result = rdev->getDevice()->CreateComputeShader(byteCode, codeLength, buildRules ? buildRules->getLinkage() : nullptr, &computeShader);
 
 		if (FAILED(result))
 		{
@@ -51,10 +51,15 @@ HRESULT ComputeSh::fromFile(const std::string& path, RDevice* rdevice, ShaderBui
 	return result;
 }
 
-HRESULT ComputeSh::fromFileSimple(const std::string name, RDevice* rdevice, ShaderBuild::ShaderComponents* buildRules, Data::Literal cd)
+HRESULT ComputeSh::fromFileSimple(const std::string name, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules, Data::Literal cd)
 {
 	std::string path;
 	if (!Data::findFileRecursive(path, name, { ".cso", ".hlsl" }, cd)) { return STG_E_FILENOTFOUND; }
 
-	return fromFile(path, rdevice, buildRules);
+	return fromFile(path, rdev, buildRules);
+}
+
+void ComputeSh::deploy(RDevice* rdev, UINT groupX, UINT groupY, UINT groupZ)
+{
+	rdev->getContext()->Dispatch(groupX, groupY, groupZ);
 }

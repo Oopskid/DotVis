@@ -11,8 +11,10 @@ namespace DVF
 		ComputeSh();
 
 		//Note:: could be made more generic with lambda for more shaders
-		HRESULT fromFile(const std::string& path, RDevice* rdevice, ShaderBuild::ShaderComponents* buildRules = &ShaderBuild::COMPUTESH_STANDARD_RULES);
-		HRESULT fromFileSimple(const std::string name, RDevice* rdevice, ShaderBuild::ShaderComponents* buildRules = &ShaderBuild::COMPUTESH_STANDARD_RULES, Data::Literal cd = nullptr);
+		HRESULT fromFile(const std::string& path, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules = &ShaderBuild::COMPUTESH_STANDARD_RULES);
+		HRESULT fromFileSimple(const std::string name, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules = &ShaderBuild::COMPUTESH_STANDARD_RULES, Data::Literal cd = nullptr);
 
+		//Run the compute shader
+		void deploy(RDevice* rdev, UINT groupX, UINT groupY = 0, UINT groupZ = 0);
 	};
 }
