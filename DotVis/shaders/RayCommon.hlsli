@@ -33,19 +33,31 @@
         //Physical properties
         float3 position;
         float3 direction; //Should be normalized
-        
+        float4 colour; //LDR during backwards, HDR on source found
+    
         //Statistics
         uint bounces = 0; //Number of ray bounces/intersections
         float distance = 0; //Distance travelled/accumulated
     };
 
+    struct RayHit
+    {
+        float4 baseColour;
+        float3 position;
+        float3 normal;
+        float2 uv;
+        uint channels;
+    };
+
     //Rules for raytracing
     struct RayPrinciples
     {
-        
-        
-        RayFeatures::ChannelCons inclusionRequirements; //Required channel properties for inclusion in raytracing
-        RayFeatures::ChannelCons blockRequirements; //Required channel properties for opaque/query block
+        uint strategy = ~0; //Algorithm flags. b0 = use reflections
+    
+        float maxDistance = ~0;
+        uint maxBounces = 0;
+        RayFeatures::ChannelCons inclusionRequirements = 0; //Required channel properties for inclusion in raytracing
+        RayFeatures::ChannelCons blockRequirements = 0; //Required channel properties for opaque/query block
     }; 
 
 #endif
