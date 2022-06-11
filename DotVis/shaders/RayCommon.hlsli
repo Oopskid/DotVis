@@ -1,10 +1,9 @@
-#pragma once
-
 #ifndef RAYCOMMON_H
 #define RAYCOMMON_H
 
     //Includes
     #include "Common.hlsli"
+    #include "Scene.hlsli"
     
     //Common defines and functionality for raytracing
     namespace RayFeatures
@@ -22,7 +21,7 @@
             conditions >>= channelCount;
         
             //Must have any of the included channels plus match all required channels
-            return channels && (channels & conditions == conditions);
+            return channels && ((channels & conditions) == conditions);
         }
 
     }
@@ -36,8 +35,8 @@
         float4 colour; //LDR during backwards, HDR on source found
     
         //Statistics
-        uint bounces = 0; //Number of ray bounces/intersections
-        float distance = 0; //Distance travelled/accumulated
+        uint bounces; //Number of ray bounces/intersections
+        float distance; //Distance travelled/accumulated
     };
 
     struct RayHit
@@ -47,17 +46,30 @@
         float3 normal;
         float2 uv;
         uint channels;
+    
+        Scene::Tags tag; //ID/discriminator
+        float3 velocity;
     };
 
     //Rules for raytracing
     struct RayPrinciples
     {
-        uint strategy = ~0; //Algorithm flags. b0 = use reflections
-    
-        float maxDistance = ~0;
-        uint maxBounces = 0;
-        RayFeatures::ChannelCons inclusionRequirements = 0; //Required channel properties for inclusion in raytracing
-        RayFeatures::ChannelCons blockRequirements = 0; //Required channel properties for opaque/query block
-    }; 
+        /*Algorithm flags. 
+            b0 = ignore marching, b1 = prefer tracing, 
+            b2-b9 = hit mask flags. For avoiding complex computation of discarded data
+            b10 = use reflections
+        */
+        uint strategy;
+        
+        float maxDistance;
+        uint maxBounces;
+        RayFeatures::ChannelCons inclusionRequirements; //Required channel properties for inclusion in raytracing
+        RayFeatures::ChannelCons blockRequirements; //Required channel properties for opaque/query block
+    };
+
+    interface iTraceable
+    {
+        bool trace(inout Ray ray, inout RayHit hitResult, const RayPrinciples rules);
+    };
 
 #endif

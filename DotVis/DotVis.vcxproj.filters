@@ -52,6 +52,15 @@
     <Filter Include="Resource Files\Shaders\Raytracing">
       <UniqueIdentifier>{3e0a40aa-cdc3-48a7-90f9-49952e679559}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders\Scene">
+      <UniqueIdentifier>{2ad471d8-df31-44db-9c5c-1d0abdd1c0aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Objects">
+      <UniqueIdentifier>{720e6191-60d3-4e66-a565-01c950c7622d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Physics">
+      <UniqueIdentifier>{77346547-45de-485d-9197-3389e6fdb3ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -127,5 +136,16 @@
     <None Include="shaders\Common.hlsli">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="shaders\Scene.hlsli">
+      <Filter>Resource Files\Shaders\Scene</Filter>
+    </None>
+    <None Include="shaders\SphereObject.hlsli">
+      <Filter>Resource Files\Shaders\Objects</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="shaders\TraceScene.hlsl">
+      <Filter>Resource Files\Shaders\Raytracing</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
