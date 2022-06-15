@@ -10,6 +10,8 @@ namespace DVF
 		public:
 		ComputeSh();
 
+		ID3D11ComputeShader* getShader();
+
 		//Note:: could be made more generic with lambda for more shaders
 		HRESULT fromFile(const std::string& path, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules = &ShaderBuild::COMPUTESH_STANDARD_RULES);
 		HRESULT fromFileSimple(const std::string name, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules = &ShaderBuild::COMPUTESH_STANDARD_RULES, Data::Literal cd = nullptr);

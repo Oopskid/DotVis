@@ -8,6 +8,11 @@ ComputeSh::ComputeSh()
 
 }
 
+ID3D11ComputeShader* ComputeSh::getShader()
+{
+	return ShaderPart::getShader<ID3D11ComputeShader>();
+}
+
 HRESULT ComputeSh::fromFile(const std::string& path, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules)
 {
 	HRESULT result = S_OK;

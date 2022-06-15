@@ -61,6 +61,12 @@
     <Filter Include="Resource Files\Shaders\Physics">
       <UniqueIdentifier>{77346547-45de-485d-9197-3389e6fdb3ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Rendering\Tracing">
+      <UniqueIdentifier>{a002f01d-e176-4e8a-8157-92070a9fbcbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering\Tracing">
+      <UniqueIdentifier>{49edeed4-1e96-44d4-b241-70bd93bca17e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -96,6 +102,9 @@
     <ClInclude Include="include\Files.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
+    <ClInclude Include="include\Raytracer.h">
+      <Filter>Header Files\Rendering\Tracing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -127,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="source\Files.cpp">
       <Filter>Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Raytracer.cpp">
+      <Filter>Source Files\Rendering\Tracing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
