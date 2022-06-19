@@ -30,6 +30,8 @@ namespace DVF
 		void holdTexture(ID3D11Texture2D* providedTexture);
 		void holdTarget(ID3D11RenderTargetView* providedTarget);
 
+		void release(); //Releases everything
+
 		protected:
 		void terminateTexture();
 		void terminateTextureTarget();

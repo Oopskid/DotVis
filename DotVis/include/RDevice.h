@@ -25,7 +25,7 @@ namespace DVF
 		HRESULT makeBackBuffer();
 
 		void clearBackBuffer();
-		void resize(size_t width, size_t height);
+		HRESULT resize(size_t width, size_t height);
 		void setBackBufferTarget();
 
 		//Swap the back buffer to present the render

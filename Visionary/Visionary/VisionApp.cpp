@@ -25,6 +25,10 @@ void VisionApp::onStart()
 	ImGui::GetIO().Fonts->AddFontDefault();
 	ImGui::GetIO().Fonts->Build();
 	ImGui_ImplDX11_CreateDeviceObjects();
+
+	#if isDebug
+		ImGui::GetIO().MouseDrawCursor = true;
+	#endif
 }
 
 void VisionApp::main()
@@ -41,7 +45,7 @@ void VisionApp::main()
 
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-	
+
 	renderDevice.swapBuffer();
 }
 
@@ -54,10 +58,24 @@ void VisionApp::onEnd()
 
 void VisionApp::onResize()
 {
-	renderDevice.resize(getWidth(), getHeight());
+	if (renderDevice.getContext())
+	{
+		if (renderDevice.resize(getWidth(), getHeight()) != S_OK)
+		{
+			std::cout << "UH \n";
+		}
+	}
+
+	RECT rect{ 0, 0, getWidth(), getHeight() };
+	InvalidateRect(wHandle, &rect, TRUE);
+
 	if (imguiCon)
 	{
-		ImGui::SetNextWindowSize(ImVec2{ (float)getWidth(), (float)getHeight() });
+		ImVec2 wSize = ImVec2{ (float)getWidth(), (float)getHeight() };
+		ImGui::SetNextWindowSize(wSize);
+		ImGui::GetIO().DisplaySize = wSize;
+
+		ImGui_ImplDX11_InvalidateDeviceObjects();
 	}
 }
 
@@ -86,11 +104,19 @@ void VisionApp::onMouseMove(short x, short y)
 	ImGui::GetIO().MousePos = { (float)x, (float)y };
 }
 
+void VisionApp::onMove()
+{
+	if (imguiCon)
+	{
+		ImGui::SetNextWindowPos(ImVec2{ (float)getX(), (float)getY() });
+	}
+}
+
 void VisionApp::render(float dt)
 {
-	if (ImGui::Begin("DEBUGWINDOW", nullptr, ImGuiWindowFlags_::ImGuiWindowFlags_AlwaysAutoResize))
+	if (ImGui::Begin("DEBUGWINDOW", nullptr, ImGuiWindowFlags_::ImGuiWindowFlags_None))
 	{
-		ImGui::Text("oof");
+		ImGui::Text("oof dddddddddddddddddd");
 	}
 	ImGui::End();
 }

@@ -13,7 +13,7 @@ RDevice::~RDevice()
 	DVXClear(swapChain);
 }
 
-HRESULT DVF::RDevice::create(UINT flags)
+HRESULT RDevice::create(UINT flags)
 {
 	if (dev || devCon) { return NTE_EXISTS; }
 
@@ -44,7 +44,7 @@ HRESULT DVF::RDevice::create(UINT flags)
 	return result;
 }
 
-HRESULT DVF::RDevice::makeSwapChain(HWND context, DXGI_FORMAT bufferFormat)
+HRESULT RDevice::makeSwapChain(HWND context, DXGI_FORMAT bufferFormat)
 {
     //Standard swapchain requirements
     DXGI_SWAP_CHAIN_DESC desc;
@@ -55,13 +55,13 @@ HRESULT DVF::RDevice::makeSwapChain(HWND context, DXGI_FORMAT bufferFormat)
     desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
     desc.SampleDesc.Count = 1;
     desc.SampleDesc.Quality = 0;
-    desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
+    desc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
     desc.OutputWindow = context;
 
     return makeSwapChain(context, desc);
 }
 
-HRESULT DVF::RDevice::makeSwapChain(HWND context, DXGI_SWAP_CHAIN_DESC options)
+HRESULT RDevice::makeSwapChain(HWND context, DXGI_SWAP_CHAIN_DESC options)
 {
     if (DVAssert(dev && devCon, "Context not built before swapchain")) { return NTE_NOT_FOUND; }
 
@@ -88,7 +88,7 @@ HRESULT DVF::RDevice::makeSwapChain(HWND context, DXGI_SWAP_CHAIN_DESC options)
     return result;
 }
 
-HRESULT DVF::RDevice::makeBackBuffer()
+HRESULT RDevice::makeBackBuffer()
 {
     if (DVAssert(dev && devCon && swapChain, "Full context is required for creation of the back buffer")) { return NTE_NOT_FOUND; }
     HRESULT result = S_OK;
@@ -96,7 +96,7 @@ HRESULT DVF::RDevice::makeBackBuffer()
     //Fetch back buffer from the swap chain
     ID3D11Texture2D* backBufferTexture = nullptr;
     result = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBufferTexture);
-    backBuffer.borrowTexture(backBufferTexture);
+    backBuffer.holdTexture(backBufferTexture); //Wait this counts as a DX reference?
 
     //Create render view
     ID3D11RenderTargetView* backBufferTarget = nullptr;
@@ -109,37 +109,53 @@ HRESULT DVF::RDevice::makeBackBuffer()
     return result;
 }
 
-void DVF::RDevice::clearBackBuffer()
+void RDevice::clearBackBuffer()
 {
     backBuffer.clearColour(devCon);
 }
 
-void DVF::RDevice::resize(size_t width, size_t height)
+HRESULT RDevice::resize(size_t width, size_t height)
 {
+    if (DVAssert(swapChain, "Swapchain is required for resize of the back buffer")) { return NTE_NOT_FOUND; }
+
+    HRESULT result = S_OK;
+
+    //Get rid of prior swap chain references
+    backBuffer.release();
+    Canvas::setNoRenderTarget(devCon);
+
+    devCon->Flush(); //Release everything in real time
+
+    result = swapChain->ResizeBuffers(0, 0, 0, DXGI_FORMAT_UNKNOWN, 0);
+    DVXFirebreak(result);
+
     backBuffer.setPort(width, height);
+    result = makeBackBuffer();
+
+    return result;
 }
 
-void DVF::RDevice::setBackBufferTarget()
+void RDevice::setBackBufferTarget()
 {
     backBuffer.setAsRenderTarget(devCon);
 }
 
-HRESULT DVF::RDevice::swapBuffer(UINT flags)
+HRESULT RDevice::swapBuffer(UINT flags)
 {
     return swapChain->Present(1, flags);
 }
 
-ID3D11Device* DVF::RDevice::getDevice()
+ID3D11Device* RDevice::getDevice()
 {
     return dev;
 }
 
-ID3D11DeviceContext* DVF::RDevice::getContext()
+ID3D11DeviceContext* RDevice::getContext()
 {
     return devCon;
 }
 
-D3D_FEATURE_LEVEL DVF::RDevice::getLevel()
+D3D_FEATURE_LEVEL RDevice::getLevel()
 {
     return supportedL;
 }

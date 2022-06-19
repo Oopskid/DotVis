@@ -22,9 +22,7 @@ Texture2DResource::Texture2DResource(Texture2DResource&& parent)
 
 Texture2DResource::~Texture2DResource()
 {
-	terminateTexture();
-	terminateTextureTarget();
-	terminateTextureView();
+	release();
 }
 
 ID3D11Texture2D* DVF::Texture2DResource::getTexture()
@@ -77,6 +75,13 @@ void DVF::Texture2DResource::holdTarget(ID3D11RenderTargetView* providedTarget)
 
 	textureTarget = providedTarget;
 	flags |= OWNERSHIP_TARGET;
+}
+
+void DVF::Texture2DResource::release()
+{
+	terminateTexture();
+	terminateTextureTarget();
+	terminateTextureView();
 }
 
 void Texture2DResource::terminateTexture()

@@ -1,5 +1,8 @@
 #pragma once
 
+//Framework
+#include "DVF.h"
+
 //UI
 #include "backends/imgui_impl_dx11.h"
 #include "backends/imgui_impl_win32.h"
@@ -27,6 +30,7 @@ class VisionApp : public Window
 	virtual void onKeyDown(char vkey) override;
 	virtual void onKeyUp(char vkey) override;
 	virtual void onMouseMove(short x, short y) override;
+	virtual void onMove() override;
 
 	void render(float dt);
 

@@ -15,6 +15,7 @@ namespace DVF
 		Canvas();
 
 		void setAsRenderTarget(ID3D11DeviceContext* devCon);
+		static void setNoRenderTarget(ID3D11DeviceContext* devCon);
 
 		void clearColour(ID3D11DeviceContext* devCon, const FLOAT* colour = defaultRed);
 

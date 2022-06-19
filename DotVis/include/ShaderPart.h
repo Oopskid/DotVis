@@ -45,7 +45,7 @@ namespace DVF
 		//Returns the shader object
 		template<typename T> T* getShader()
 		{
-			return dynamic_cast<T>(shaderObj);
+			return dynamic_cast<T*>(shaderObj);
 		}
 
 		private:

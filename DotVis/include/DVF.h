@@ -21,7 +21,7 @@
 
 	//Macro helpers
 	#define DVXFirebreak(result) if(FAILED(result)) { return result; }
-	#define isDebug (defined(DEBUG) || defined(_DEBUG))
+	#define isDebug (DEBUG || _DEBUG)
 
 	//Function helpers
 	namespace DVF
@@ -45,7 +45,7 @@
 		//Complex assert (can be redirected)
 		inline bool DVAssert(bool expression, const char* txt)
 		{
-			#ifdef _DEBUG
+			#if isDebug
 				assert(expression && txt);
 				return false;
 			#else
