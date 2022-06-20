@@ -93,6 +93,7 @@
       </AdditionalModuleDependencies>
       <AdditionalHeaderUnitDependencies>
       </AdditionalHeaderUnitDependencies>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -100,6 +101,9 @@
       <AdditionalDependencies>WSTRCore.lib;DotVis.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(DXSDK_DIR)Lib\x86</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)..\DotVis\shaders $(SolutionDir)$(Platform)\$(Configuration)\shaders /C /y /u /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -123,6 +127,9 @@
       <AdditionalDependencies>WSTRCore.lib;DotVis.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(DXSDK_DIR)Lib\x86</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)..\DotVis\shaders $(SolutionDir)$(Platform)\$(Configuration)\shaders /C /y /u /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -135,6 +142,7 @@
       </AdditionalModuleDependencies>
       <AdditionalHeaderUnitDependencies>
       </AdditionalHeaderUnitDependencies>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,6 +150,9 @@
       <AdditionalDependencies>WSTRCore.lib;DotVis.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(DXSDK_DIR)Lib\x64</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)..\DotVis\shaders $(SolutionDir)$(Platform)\$(Configuration)\shaders /C /y /u /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -165,6 +176,9 @@
       <AdditionalDependencies>WSTRCore.lib;DotVis.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(DXSDK_DIR)Lib\x64</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(SolutionDir)..\DotVis\shaders $(SolutionDir)$(Platform)\$(Configuration)\shaders /C /y /u /E /I</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\externals\imgui\backends\imgui_impl_dx11.cpp" />
