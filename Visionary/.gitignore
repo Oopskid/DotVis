@@ -105,7 +105,3 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
-
-# imgui
-**/imgui.ini
-imgui.ini
