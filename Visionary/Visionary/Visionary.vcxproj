@@ -102,7 +102,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(DXSDK_DIR)Lib\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)..\DotVis\shaders $(SolutionDir)$(Platform)\$(Configuration)\shaders /C /y /u /E /I</Command>
+      <Command>xcopy "$(SolutionDir)..\DotVis\$(Platform)\$(Configuration)\shaders\*.cso" "$(SolutionDir)\$(Platform)\$(Configuration)\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\$(Platform)\$(Configuration)\shaders\*.cso" "$(SolutionDir)\Visionary\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\shaders" "$(SolutionDir)$(Platform)\$(Configuration)\shaders" /c /y /e /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,7 +130,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(DXSDK_DIR)Lib\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)..\DotVis\shaders $(SolutionDir)$(Platform)\$(Configuration)\shaders /C /y /u /E /I</Command>
+      <Command>xcopy "$(SolutionDir)..\DotVis\$(Platform)\$(Configuration)\shaders\*.cso" "$(SolutionDir)\$(Platform)\$(Configuration)\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\$(Platform)\$(Configuration)\shaders\*.cso" "$(SolutionDir)\Visionary\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\shaders" "$(SolutionDir)$(Platform)\$(Configuration)\shaders" /c /y /e /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -151,7 +155,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(DXSDK_DIR)Lib\x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)..\DotVis\shaders $(SolutionDir)$(Platform)\$(Configuration)\shaders /C /y /u /E /I</Command>
+      <Command>xcopy "$(SolutionDir)..\DotVis\$(Platform)\$(Configuration)\*.cso" "$(SolutionDir)\$(Platform)\$(Configuration)\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\$(Platform)\$(Configuration)\*.cso" "$(SolutionDir)\Visionary\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\shaders" "$(SolutionDir)$(Platform)\$(Configuration)\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\shaders" "$(SolutionDir)\Visionary\shaders" /c /y /e /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -177,7 +184,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;$(DXSDK_DIR)Lib\x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(SolutionDir)..\DotVis\shaders $(SolutionDir)$(Platform)\$(Configuration)\shaders /C /y /u /E /I</Command>
+      <Command>xcopy "$(SolutionDir)..\DotVis\$(Platform)\$(Configuration)\*.cso" "$(SolutionDir)\$(Platform)\$(Configuration)\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\$(Platform)\$(Configuration)\*.cso" "$(SolutionDir)\Visionary\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\shaders" "$(SolutionDir)$(Platform)\$(Configuration)\shaders" /c /y /e /i
+xcopy "$(SolutionDir)..\DotVis\shaders" "$(SolutionDir)\Visionary\shaders" /c /y /e /i</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

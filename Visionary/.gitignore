@@ -105,3 +105,8 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
+
+# Ignore borrowed shaders
+*.cso
+*.hlsl
+*.hlsli
