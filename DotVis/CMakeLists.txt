@@ -7,6 +7,7 @@ addIncludesAuto(${CMAKE_CURRENT_LIST_DIR}/include CMFT_HEADER_c++ Headers)
 add_library(DotVis STATIC "${INCLUDES}")
 bindIncludes(DotVis)
 
+target_compile_features(DotVis PUBLIC cxx_std_17)
 target_link_libraries(DotVis Deed WSTRCore)
 
 endLib(DotVis)
