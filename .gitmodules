@@ -7,3 +7,6 @@
 [submodule "externals/Deed"]
 	path = externals/Deed
 	url = https://github.com/Oopskid/Deed.git
+[submodule "externals/CMakeGym"]
+	path = externals/CMakeGym
+	url = https://github.com/Oopskid/CMakeGym.git
