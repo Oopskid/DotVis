@@ -14,9 +14,9 @@ void VisionApp::onStart()
 {
 	Window::onStart();
 
-	renderDevice.create();
-	renderDevice.makeSwapChain(wHandle);
-	renderDevice.makeBackBuffer();
+	DVAssert(renderDevice.create() == S_OK, "Failed to create the device obj");
+	DVAssert(renderDevice.makeSwapChain(wHandle) == S_OK, "Failed to create the swapchain");
+	DVAssert(renderDevice.makeBackBuffer() == S_OK, "Failed to create the backbuffer");
 
 	imguiCon = ImGui::CreateContext();
 	ImGui::SetCurrentContext(imguiCon);
@@ -30,7 +30,14 @@ void VisionApp::onStart()
 		//ImGui::GetIO().MouseDrawCursor = true;
 	#endif
 
-	tracer.init(&renderDevice);
+	tracer.init(&renderDevice, std::wstring(CURRENT_DIRECTORY).append(L"/shaders"));
+}
+
+void VisionApp::onEnd()
+{
+	ImGui_ImplWin32_Shutdown();
+	ImGui_ImplDX11_Shutdown();
+	ImGui::DestroyContext(imguiCon);
 }
 
 void VisionApp::main()
@@ -49,13 +56,6 @@ void VisionApp::main()
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 	renderDevice.swapBuffer();
-}
-
-void VisionApp::onEnd()
-{
-	ImGui_ImplWin32_Shutdown();
-	ImGui_ImplDX11_Shutdown();
-	ImGui::DestroyContext(imguiCon);
 }
 
 void VisionApp::onResize()
@@ -115,6 +115,11 @@ void VisionApp::onMove()
 }
 
 void VisionApp::render(float dt)
+{
+	renderGUI();
+}
+
+void VisionApp::renderGUI()
 {
 	if (ImGui::Begin("DEBUGWINDOW", nullptr, ImGuiWindowFlags_::ImGuiWindowFlags_None))
 	{

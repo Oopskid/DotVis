@@ -26,15 +26,15 @@ namespace DVF
 
 		protected:
 		//Freeform reference to the source
-		char* tag = nullptr;
+		Data::CString tag = nullptr;
 
 		//Fetches a file, returns the input stream and success
-		bool getFile(std::ifstream& in, const std::string& path, bool asContext = true);
+		bool getFile(std::ifstream& in, const std::wstring& path, bool asContext = true);
 
-		size_t fetchRaw(const std::string& path, BYTE** raw, bool asContext = true);
-		HRESULT fetchRawCompile(const std::string& path, BYTE** raw, size_t& rawCount, LPCSTR model = nullptr, LPCSTR name = nullptr, ShaderBuild::ShaderComponents* compileRules = nullptr, UINT flags = D3DCOMPILE_ENABLE_STRICTNESS, bool asContext = true, bool cache = true);
+		size_t fetchRaw(const std::wstring& path, BYTE** raw, bool asContext = true);
+		HRESULT fetchRawCompile(const std::wstring& path, BYTE** raw, size_t& rawCount, LPCSTR model = nullptr, LPCSTR name = nullptr, ShaderBuild::ShaderComponents* compileRules = nullptr, UINT flags = D3DCOMPILE_ENABLE_STRICTNESS, bool asContext = true, bool cache = true);
 
-		bool isCompiled(const std::string& path);
+		static bool isCompiled(const std::wstring& path);
 
 		void destroyTag();
 

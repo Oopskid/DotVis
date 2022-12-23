@@ -2,8 +2,8 @@
 #define RAYCOMMON_H
 
     //Includes
-    #include "Common.hlsli"
-    #include "Scene.hlsli"
+    #include "../Common.hlsli"
+    #include "../Scene/Scene.hlsli"
     
     //Common defines and functionality for raytracing
     namespace RayFeatures

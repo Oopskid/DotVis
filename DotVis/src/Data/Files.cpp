@@ -3,12 +3,12 @@
 
 using namespace DVF;
 
-bool Data::findFileRecursive(std::string& foundPath, const std::string& file, std::vector<std::string> extensions, Literal cd)
+bool Data::findFileRecursive(std::wstring& foundPath, const std::wstring& file, std::vector<std::wstring> extensions, WLiteral cd)
 {
 	namespace fs = std::filesystem;
 
 	//Cache extensions
-	std::map<std::string, size_t> extensionMap;
+	std::map<std::wstring, size_t> extensionMap;
 	for (size_t i = 0; i < extensions.size(); i++)
 	{
 		extensionMap.insert(std::make_pair(extensions[i], i));
@@ -18,7 +18,8 @@ bool Data::findFileRecursive(std::string& foundPath, const std::string& file, st
 	size_t bestExtension = ~0; //(use 'infinity' as null)
 	size_t bestLevel = NULL;
 	fs::recursive_directory_iterator start(cd ? cd : fs::current_path());
-	for (auto it = start; it != fs::end(start); it++)
+	fs::recursive_directory_iterator end = fs::end(start);
+	for (auto it = start; it != end; it++)
 	{
 		//If detect depth change and result is pending, return
 		if ((bestExtension != ~0) && bestLevel != it.depth()) { return true; }
@@ -28,16 +29,16 @@ bool Data::findFileRecursive(std::string& foundPath, const std::string& file, st
 		if (thisPath.has_filename() && thisPath.stem() == file)
 		{
 			//Return without extensions
-			if (extensions.size() <= 0) { foundPath = thisPath.string(); return true; }
+			if (extensions.size() <= 0) { foundPath = thisPath.wstring(); return true; }
 
 			//Check for extensions
 			if (thisPath.has_extension())
 			{
-				auto extensionIt = extensionMap.find(thisPath.extension().string());
+				auto extensionIt = extensionMap.find(thisPath.extension().wstring());
 				if (extensionIt != extensionMap.end())
 				{
 					//If best extension found then no need to continue searching
-					if (extensionIt->second <= 0) { foundPath = thisPath.string(); return true; }
+					if (extensionIt->second <= 0) { foundPath = thisPath.wstring(); return true; }
 
 					//Instead cache if better result
 					if (extensionIt->second < bestExtension)
@@ -45,7 +46,7 @@ bool Data::findFileRecursive(std::string& foundPath, const std::string& file, st
 						bestExtension = extensionIt->second;
 						bestLevel = it.depth();
 
-						foundPath = thisPath.string();
+						foundPath = thisPath.wstring();
 					}
 				}
 			}

@@ -10,7 +10,7 @@ RDevice::RDevice()
 
 RDevice::~RDevice()
 {
-	DVXClear(swapChain);
+	DVXClear(swapChain, dev, devCon);
 }
 
 HRESULT RDevice::create(UINT flags)
@@ -52,6 +52,7 @@ HRESULT RDevice::makeSwapChain(HWND context, DXGI_FORMAT bufferFormat)
     desc.Windowed = TRUE;
     desc.BufferCount = 2;
     desc.BufferDesc.Format = bufferFormat;
+    desc.BufferDesc.Width, desc.BufferDesc.Height = 0xFF;
     desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
     desc.SampleDesc.Count = 1;
     desc.SampleDesc.Quality = 0;
@@ -67,23 +68,28 @@ HRESULT RDevice::makeSwapChain(HWND context, DXGI_SWAP_CHAIN_DESC options)
 
     HRESULT result = S_OK;
 
-    //Get the DXGI association
     IDXGIDevice1* deviceObj = nullptr;
+    IDXGIAdapter* adapter = nullptr;
+    IDXGIFactory* factory = nullptr;
+    DVXClear(swapChain);
+    auto cleanup = [=]() { DVXClear(deviceObj, adapter, factory); };
+
+    //Get the DXGI association
     result = dev->QueryInterface(&deviceObj);
-    DVXFirebreak(result);
+    DVXFirebreakC(result, cleanup);
 
     //Fetch adapter
-    IDXGIAdapter* adapter = nullptr;
     result = deviceObj->GetAdapter(&adapter);
-    DVXFirebreak(result);
+    DVXFirebreakC(result, cleanup);
 
     //Create a swapchain factory
-    IDXGIFactory* factory;
     result = adapter->GetParent(IID_PPV_ARGS(&factory));
-    DVXFirebreak(result);
+    DVXFirebreakC(result, cleanup);
 
     //Create swapchain
     result = factory->CreateSwapChain(dev, &options, &swapChain);
+
+    cleanup();
 
     return result;
 }
@@ -97,14 +103,15 @@ HRESULT RDevice::makeBackBuffer()
     ID3D11Texture2D* backBufferTexture = nullptr;
     result = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBufferTexture);
     backBuffer.holdTexture(backBufferTexture); //Wait this counts as a DX reference?
+    DVXFirebreak(result);
+
+    //Cache metadata and set viewport
+    backBuffer.updateMeta();
 
     //Create render view
     ID3D11RenderTargetView* backBufferTarget = nullptr;
     result = dev->CreateRenderTargetView(backBufferTexture, nullptr, &backBufferTarget);
     backBuffer.holdTarget(backBufferTarget);
-
-    //Cache metadata and set viewport
-    backBuffer.updateMeta();
 
     return result;
 }
@@ -126,10 +133,11 @@ HRESULT RDevice::resize(size_t width, size_t height)
 
     devCon->Flush(); //Release everything in real time
 
-    result = swapChain->ResizeBuffers(0, 0, 0, DXGI_FORMAT_UNKNOWN, 0);
+    result = swapChain->ResizeBuffers(0, width, height, DXGI_FORMAT_UNKNOWN, 0);
     DVXFirebreak(result);
 
     backBuffer.setPort(width, height);
+    backBuffer.setDepth(.0f, 1.0f);
     result = makeBackBuffer();
 
     return result;

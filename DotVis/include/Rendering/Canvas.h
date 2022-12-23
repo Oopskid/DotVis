@@ -17,7 +17,7 @@ namespace DVF
 		void setAsRenderTarget(ID3D11DeviceContext* devCon);
 		static void setNoRenderTarget(ID3D11DeviceContext* devCon);
 
-		void clearColour(ID3D11DeviceContext* devCon, const FLOAT* colour = defaultRed);
+		void clearColour(ID3D11DeviceContext* devCon, const FLOAT colour[4] = defaultRed);
 
 		//Use provided texture to fetch metadata
 		void updateMeta(bool refreshPort = true);

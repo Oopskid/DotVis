@@ -8,9 +8,9 @@ Raytracer::Raytracer()
 	
 }
 
-HRESULT Raytracer::init(RDevice* dev)
+HRESULT Raytracer::init(RDevice* dev, const std::wstring& resourceDir)
 {
-	return traceSh.fromFileSimple("TraceScene", dev);
+	return traceSh.fromFileSimple(L"TraceScene", dev, resourceDir.data());
 }
 
 void DVF::Raytracer::use(RDevice* dev)

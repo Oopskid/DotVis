@@ -8,7 +8,7 @@ HRESULT ShaderBuild::compileShader(ID3DBlob** byteResult, const BYTE* source, si
 	HRESULT result = S_OK;
 
 	#if isDebug
-		flags |= D3DCOMPILE_DEBUG;
+		if (errorResult) { flags |= D3DCOMPILE_DEBUG; }
 	#endif
 
 	result = D3DCompile(source, sourceLen, tag, rules.getDefinitions(), rules.getIncludes(), rules.getEntry(), model, flags, NULL, byteResult, errorResult);

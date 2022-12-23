@@ -5,7 +5,7 @@ using namespace DVF;
 
 Canvas::Canvas()
 {
-	
+	ZeroMemory(&view, sizeof(D3D11_VIEWPORT));
 }
 
 void Canvas::setAsRenderTarget(ID3D11DeviceContext* devCon)
@@ -19,7 +19,7 @@ void Canvas::setNoRenderTarget(ID3D11DeviceContext* devCon)
 	devCon->OMSetRenderTargets(0, nullptr, nullptr);
 }
 
-void Canvas::clearColour(ID3D11DeviceContext* devCon, const FLOAT* colour)
+void Canvas::clearColour(ID3D11DeviceContext* devCon, const FLOAT colour[4])
 {
 	devCon->ClearRenderTargetView(textureTarget, colour);
 }

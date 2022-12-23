@@ -2,6 +2,7 @@
 #include "Shaders/ComputeSh.h"
 
 using namespace DVF;
+using namespace DVF::ShaderBuild;
 
 ComputeSh::ComputeSh()
 {
@@ -13,7 +14,7 @@ ID3D11ComputeShader* ComputeSh::getShader()
 	return ShaderPart::getShader<ID3D11ComputeShader>();
 }
 
-HRESULT ComputeSh::fromFile(const std::string& path, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules)
+HRESULT ComputeSh::fromFile(const std::wstring& path, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules)
 {
 	HRESULT result = S_OK;
 
@@ -56,10 +57,10 @@ HRESULT ComputeSh::fromFile(const std::string& path, RDevice* rdev, ShaderBuild:
 	return result;
 }
 
-HRESULT ComputeSh::fromFileSimple(const std::string name, RDevice* rdev, ShaderBuild::ShaderComponents* buildRules, Data::Literal cd)
+HRESULT ComputeSh::fromFileSimple(const std::wstring name, RDevice* rdev, Data::WLiteral cd, ShaderBuild::ShaderComponents* buildRules)
 {
-	std::string path;
-	if (!Data::findFileRecursive(path, name, { ".cso", ".hlsl" }, cd)) { return STG_E_FILENOTFOUND; }
+	std::wstring path;
+	if (!Data::findFileRecursive(path, name, { PRECOMPILED_EXT, FORMATTED_EXT }, cd)) { return STG_E_FILENOTFOUND; }
 
 	return fromFile(path, rdev, buildRules);
 }

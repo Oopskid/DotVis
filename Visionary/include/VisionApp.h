@@ -34,6 +34,7 @@ class VisionApp : public Window
 	virtual void onMove() override;
 
 	void render(float dt);
+	void renderGUI();
 
 	private:
 	ImGuiContext* imguiCon;

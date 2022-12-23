@@ -13,23 +13,23 @@ void ShaderPart::setTag(const std::string& newTag)
 {
     destroyTag();
 
-    tag = _strdup(tag);
+    tag = _strdup(newTag.c_str());
 }
 
-bool ShaderPart::getFile(std::ifstream& in, const std::string& path, bool asContext)
+bool ShaderPart::getFile(std::ifstream& in, const std::wstring& path, bool asContext)
 {
     in.open(path);
 
     //Construct null terminated path tag
     if (asContext)
     {
-        setTag(path);
+        //setTag(path); //TODO
     }
 
     return in.good();
 }
 
-size_t ShaderPart::fetchRaw(const std::string& path, BYTE** raw, bool asContext)
+size_t ShaderPart::fetchRaw(const std::wstring& path, BYTE** raw, bool asContext)
 {
     std::ifstream in;
     if (getFile(in, path))
@@ -58,7 +58,7 @@ size_t ShaderPart::fetchRaw(const std::string& path, BYTE** raw, bool asContext)
     return NULL;
 }
 
-HRESULT ShaderPart::fetchRawCompile(const std::string& path, BYTE** raw, size_t& rawCount, LPCSTR model, LPCSTR name, ShaderBuild::ShaderComponents* compileRules, UINT flags, bool asContext, bool cache)
+HRESULT ShaderPart::fetchRawCompile(const std::wstring& path, BYTE** raw, size_t& rawCount, LPCSTR model, LPCSTR name, ShaderBuild::ShaderComponents* compileRules, UINT flags, bool asContext, bool cache)
 {
     HRESULT result = S_OK;
 
@@ -98,7 +98,7 @@ HRESULT ShaderPart::fetchRawCompile(const std::string& path, BYTE** raw, size_t&
     if (cache)
     {
         std::filesystem::path cachePath(path);
-        cachePath.replace_extension(ShaderBuild::PRECOMPILE_EXT);
+        cachePath.replace_extension(ShaderBuild::PRECOMPILED_EXT);
 
         std::ofstream cacheOut(cachePath);
         cacheOut.write((const char*)(*raw), rawCount);
@@ -110,11 +110,11 @@ HRESULT ShaderPart::fetchRawCompile(const std::string& path, BYTE** raw, size_t&
     return result;
 }
 
-bool ShaderPart::isCompiled(const std::string& path)
+bool ShaderPart::isCompiled(const std::wstring& path)
 {
     std::filesystem::path pathBreakdown(path);
 
-    return pathBreakdown.has_extension() && pathBreakdown.extension() == ShaderBuild::PRECOMPILE_EXT;
+    return pathBreakdown.has_extension() && pathBreakdown.extension() == ShaderBuild::PRECOMPILED_EXT;
 }
 
 void ShaderPart::destroyTag()

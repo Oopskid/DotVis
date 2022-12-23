@@ -47,7 +47,7 @@ namespace DVF
 			D3D_FEATURE_LEVEL_9_1,
 		};
 
-		//Device references (not owned)
+		//Device
 		ID3D11Device* dev = nullptr;
 		ID3D11DeviceContext* devCon = nullptr;
 		D3D_FEATURE_LEVEL supportedL;

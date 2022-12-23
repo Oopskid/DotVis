@@ -6,7 +6,10 @@ using namespace DVF::Tex;
 
 Texture2DResource::Texture2DResource()
 {
-
+	flags = NULL;
+	texture = nullptr;
+	textureTarget = nullptr;
+	textureView = nullptr;
 }
 
 Texture2DResource::Texture2DResource(Texture2DResource&& parent)

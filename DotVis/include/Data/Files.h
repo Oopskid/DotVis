@@ -19,7 +19,12 @@ namespace DVF
 		typedef const char* CStringC; //Constant c-style string
 		typedef const char* const Literal; //C-style string which should not be deleted
 
+		typedef wchar_t* CWString;
+		typedef const wchar_t* CWStringC;
+		typedef const wchar_t* const WLiteral;
+
 		//Searches for a valid file. Returns path in order of prefered extension then sub folder. null directory = current directory. Empty extensions = ANY. Returns if successful
-		bool findFileRecursive(std::string& foundPath, const std::string& file, std::vector<std::string> extensions, Literal cd = nullptr);
+		bool findFileRecursive(std::wstring& foundPath, const std::wstring& file, std::vector<std::wstring> extensions, WLiteral cd = nullptr);
+
 	}
 }

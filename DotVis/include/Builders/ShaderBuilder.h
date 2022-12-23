@@ -2,6 +2,7 @@
 
 //Dependencies
 #include "Shaders/ShaderComponents.h"
+#include "Data/Files.h"
 
 //Framework
 #include "Core/DVF.h"
@@ -20,6 +21,8 @@ namespace DVF
 		static ShaderComponents HULLSH_STANDARD_RULES;
 		static ShaderComponents COMPUTESH_STANDARD_RULES;
 
-		static constexpr const char* PRECOMPILE_EXT = ".cso";
+		static constexpr Data::WLiteral PRECOMPILED_EXT = L".cso";
+		static constexpr Data::WLiteral FORMATTED_EXT = L".hlsl";
+		static constexpr Data::WLiteral INTERFACE_EXT = L".hlsli";
 	}
 }

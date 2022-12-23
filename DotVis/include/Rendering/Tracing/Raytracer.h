@@ -14,7 +14,7 @@ namespace DVF
 		public:
 		Raytracer();
 
-		HRESULT init(RDevice* dev);
+		HRESULT init(RDevice* dev, const std::wstring& resourceDir);
 
 		void use(RDevice* dev);
 

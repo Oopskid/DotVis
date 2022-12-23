@@ -1,3 +1,4 @@
+#pragma once
 //Core DotVis framework
 
 //Direct3D
@@ -21,6 +22,7 @@
 
 	//Macro helpers
 	#define DVXFirebreak(result) if(FAILED(result)) { return result; }
+	#define DVXFirebreakC(result, cleanupCallback) if(FAILED(result)) { cleanupCallback(); return result; }
 	#define isDebug (DEBUG || _DEBUG)
 
 	//Function helpers
@@ -36,6 +38,11 @@
 			}
 		}
 
+		template<typename R> void DVXClear(const R& res)
+		{
+			if (res) { res->Release(); }
+		}
+
 		template<typename F, typename... T> void DVXClear(F& first, T&... rest)
 		{
 			DVXClear(first);
@@ -47,10 +54,8 @@
 		{
 			#if isDebug
 				assert(expression && txt);
-				return false;
-			#else
-				return !expression;
 			#endif
+			return !expression;
 		}
 	}
 
